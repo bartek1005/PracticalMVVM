@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,7 +61,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\CoffeeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CoffeeOverviewView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,8 +73,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Services\CoffeeDataService.cs" />
+    <Compile Include="Services\IDataService.cs" />
+    <Compile Include="View\CoffeeDetailView.xaml.cs">
+      <DependentUpon>CoffeeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CoffeeOverviewView.xaml.cs">
+      <DependentUpon>CoffeeOverviewView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -86,6 +102,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +110,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\coffee1.jpg" />
+    <Resource Include="Images\coffee2.jpg" />
+    <Resource Include="Images\coffee3.jpg" />
+    <Resource Include="Images\coffee4.jpg" />
+    <Resource Include="Images\coffee5.jpg" />
+    <Resource Include="Images\coffee6.jpg" />
+    <Resource Include="Images\coffee7.jpg" />
+    <Resource Include="Images\coffee8.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PracticalMVVM.DAL\PracticalMVVM.DAL.csproj">
+      <Project>{8161261E-2C68-404F-A2DA-BC75F6492F58}</Project>
+      <Name>PracticalMVVM.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PracticalMVVM.Model\PracticalMVVM.Model.csproj">
+      <Project>{53E08BEC-5E82-434B-BADE-7E8FD90D0963}</Project>
+      <Name>PracticalMVVM.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
