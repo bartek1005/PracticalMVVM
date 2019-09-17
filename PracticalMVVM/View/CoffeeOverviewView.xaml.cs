@@ -24,6 +24,7 @@ namespace PracticalMVVM.View
     public partial class CoffeeOverviewView : MetroWindow
     {
         private Coffee selectedCoffee;
+        private List<Coffee> coffees;
         public CoffeeOverviewView()
         {
             InitializeComponent();
@@ -33,7 +34,8 @@ namespace PracticalMVVM.View
         private void LoadData()
         {
             CoffeeDataService coffeeDataService = new CoffeeDataService();
-            CoffeeListView.ItemsSource = coffeeDataService.GetAllCoffees();
+            coffees = coffeeDataService.GetAllCoffees();
+            CoffeeListView.ItemsSource = coffees;
         }
 
         public void EditCoffeeButton_Click(object sender, RoutedEventArgs e)
