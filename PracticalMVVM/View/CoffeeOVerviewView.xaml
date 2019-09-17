@@ -27,13 +27,13 @@
                                 <RowDefinition Height="30"/>
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
-                            <Image Source="{Binding ImageId}" Grid.RowSpan="2" VerticalAlignment="Center"/>
-                            <Label Content="{Binding CoffeeName}" FontSize="14" FontWeight="Bold" Grid.Column="1" Grid.ColumnSpan="2"/>
+                            <Image Source="{Binding ImageId, Converter={StaticResource localImageConverter}}" Grid.RowSpan="2" VerticalAlignment="Center"/>
+                            <Label Content="{Binding CoffeeName,Converter={StaticResource localDoNothingConverter}}" FontSize="14" FontWeight="Bold" Grid.Column="1" Grid.ColumnSpan="2"/>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="1">
                                 <Label Content="Stock: "/>
-                                <Label Content="{Binding AmountInStock}"/>
+                                <Label Content="{Binding AmountInStock, Converter={StaticResource localAmountInStockConverter}}"/>
                             </StackPanel>
-                            <Label Content="{Binding Price}" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2"/>
+                            <Label Content="{Binding Price, Converter={StaticResource localPriceConverter}}" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -55,8 +55,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image Name="CoffeeImage" Grid.Row="0" Grid.ColumnSpan="2" MaxHeight="150" MaxWidth="150"></Image>
-            <Label Grid.Row="1" Content="Id" FontWeight="Bold">
-            </Label>
+            <Label Grid.Row="1" Content="Id" FontWeight="Bold"></Label>
             <Label Grid.Row="2" Content="Coffee name" FontWeight="Bold"></Label>
             <Label Grid.Row="3" Content="Description" FontWeight="Bold"></Label>
             <Label Grid.Row="4" Content="Price" FontWeight="Bold"></Label>
@@ -71,8 +70,8 @@
             <Label Grid.Row="6" Grid.Column="1" Name="FirstTimeAddedLabel"></Label>
             <StackPanel Grid.Row ="7">
                 <Button Name ="EditCoffeeButton" Click="EditCoffeeButton_Click" Content="Edit Coffee"></Button>
-                <Button Name="AddFakeCoffeeButton" Click="AddFakeCoffeeButton_Click" Content="Add Coffee"/>
             </StackPanel>
+            <Button Name="AddFakeCoffeeButton" Click="AddFakeCoffeeButton_Click" Content="Add Coffee" Grid.Column="2" Grid.Row="7"/>
         </Grid>
     </Grid>
 </Controls:MetroWindow>
