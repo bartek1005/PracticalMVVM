@@ -1,8 +1,10 @@
 ﻿using MahApps.Metro.Controls;
+using PracticalMVVM.Extensions;
 using PracticalMVVM.Model;
 using PracticalMVVM.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +26,7 @@ namespace PracticalMVVM.View
     public partial class CoffeeOverviewView : MetroWindow
     {
         private Coffee selectedCoffee;
-        private List<Coffee> coffees;
+        private ObservableCollection<Coffee> coffees;
         public CoffeeOverviewView()
         {
             InitializeComponent();
@@ -34,7 +36,7 @@ namespace PracticalMVVM.View
         private void LoadData()
         {
             CoffeeDataService coffeeDataService = new CoffeeDataService();
-            coffees = coffeeDataService.GetAllCoffees();
+            coffees = coffeeDataService.GetAllCoffees().ToObservableCollection();
             CoffeeListView.ItemsSource = coffees;
         }
 
@@ -63,6 +65,23 @@ namespace PracticalMVVM.View
                 img.EndInit();
                 CoffeeImage.Source = img;
             }
+        }
+
+        private void AddFakeCoffeeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Coffee coffee = new Coffee()
+            {
+                CoffeeId = 100,
+                CoffeeName = "New Coffee",
+                Price = 1,
+                AmountInStock = 10,
+                FirstAddedToStockDate = DateTime.UtcNow,
+                Description = "Who knows",
+                InStock = true,
+                OriginCountry = Country.Ethiopia,
+                ImageId = 10
+            };
+            coffees.Add(coffee);
         }
     }
 }

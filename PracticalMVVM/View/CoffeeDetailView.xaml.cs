@@ -63,5 +63,11 @@ namespace PracticalMVVM.View
         {
             this.Close();
         }
+
+        private void ChangeCoffeeButton_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedCoffee.CoffeeName = "ShittyCoffee";
+            SelectedCoffee.Price = 999;
+        }
     }
 }
