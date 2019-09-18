@@ -37,12 +37,12 @@
             <Label Grid.Row="5" Content="Stock amount" FontWeight="Bold"></Label>
             <Label Grid.Row="6" Content="First time added" FontWeight="Bold"></Label>
 
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CoffeeId, Mode=OneWay}"></TextBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Description}" AcceptsReturn="True" Height="75"></TextBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Price}"></TextBox>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding AmountInStock}"></TextBox>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding FirstAddedToStockDate}"></TextBox>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ExtraDescription}"></TextBox>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedCoffee.CoffeeId, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedCoffee.Description, Mode=TwoWay}" AcceptsReturn="True" Height="75"></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedCoffee.Price, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedCoffee.AmountInStock, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SelectedCoffee.FirstAddedToStockDate, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding SelectedCoffee.ExtraDescription, Mode=TwoWay, FallbackValue='NA'}"></TextBox>
 
             <StackPanel Grid.Row="9" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <Button Name="SaveCoffeeButton" Click="SaveCoffeeButton_Click" Margin="5" Content="Save coffee"></Button>

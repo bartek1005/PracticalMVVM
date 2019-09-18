@@ -4,15 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:viewmodel="clr-namespace:PracticalMVVM.ViewModel"
         mc:Ignorable="d"
         Title="CoffeeOverviewView" Height="450" Width="800">
+    <Controls:MetroWindow.DataContext>
+        <viewmodel:CoffeeOverviewViewModel></viewmodel:CoffeeOverviewViewModel>
+    </Controls:MetroWindow.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" Margin="5" 
-                   Name="CoffeeListView" SelectionChanged="CoffeeListView_SelectionChanged">
+        <ListView Grid.Column="0" Margin="5" ItemsSource="{Binding Coffees}" SelectedItem="{Binding SelectedCoffee}"
+                   Name="CoffeeListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="#CCCCCC" BorderThickness="1">
@@ -62,16 +66,14 @@
             <Label Grid.Row="5" Content="Stock amount" FontWeight="Bold"></Label>
             <Label Grid.Row="6" Content="First time added" FontWeight="Bold"></Label>
 
-            <Label Grid.Row="1" Grid.Column="1" Name="CoffeeIdLabel"></Label>
-            <Label Grid.Row="2" Grid.Column="1" Name="CoffeeNameLabel"></Label>
-            <Label Grid.Row="3" Grid.Column="1" Name="DescriptionLabel"></Label>
-            <Label Grid.Row="4" Grid.Column="1" Name="PriceLabel"></Label>
-            <Label Grid.Row="5" Grid.Column="1" Name="StockAmountLabel"></Label>
-            <Label Grid.Row="6" Grid.Column="1" Name="FirstTimeAddedLabel"></Label>
+            <Label Grid.Row="1" Grid.Column="1" Name="CoffeeIdLabel" Content="{Binding SelectedCoffee.CoffeeId, Mode=OneWay}"></Label>
+            <Label Grid.Row="2" Grid.Column="1" Name="CoffeeNameLabel" Content="{Binding SelectedCoffee.CoffeeName, Mode=OneWay}"></Label>
+            <Label Grid.Row="3" Grid.Column="1" Name="DescriptionLabel" Content="{Binding SelectedCoffee.Description, Mode=OneWay}"></Label>
+            <Label Grid.Row="4" Grid.Column="1" Name="PriceLabel" Content="{Binding SelectedCoffee.Price, Mode=OneWay}"></Label>
+            <Label Grid.Row="5" Grid.Column="1" Name="StockAmountLabel" Content="{Binding SelectedCoffee.AmountInStock, Mode=OneWay}"></Label>
+            <Label Grid.Row="6" Grid.Column="1" Name="FirstTimeAddedLabel" Content="{Binding SelectedCoffee.FirstAddedToStockDate, Mode=OneWay}"></Label>
             <StackPanel Grid.Row ="7">
-                <Button Name ="EditCoffeeButton" Click="EditCoffeeButton_Click" Content="Edit Coffee"></Button>
             </StackPanel>
-            <Button Name="AddFakeCoffeeButton" Click="AddFakeCoffeeButton_Click" Content="Add Coffee" Grid.Column="2" Grid.Row="7"/>
         </Grid>
     </Grid>
 </Controls:MetroWindow>
