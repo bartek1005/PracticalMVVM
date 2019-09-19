@@ -1,4 +1,5 @@
 ﻿using PracticalMVVM.Extensions;
+using PracticalMVVM.Messages;
 using PracticalMVVM.Model;
 using PracticalMVVM.Services;
 using PracticalMVVM.Utility;
@@ -60,6 +61,13 @@ namespace PracticalMVVM.ViewModel
             coffeeDataService = new CoffeeDataService();
             LoadData();
             LoadCommands();
+
+            Messenger.Default.Register<UpdateListMessage>(this, OnUpdateListMessageReceived);
+        }
+
+        private void OnUpdateListMessageReceived(UpdateListMessage obj)
+        {
+            LoadData(); 
         }
 
         private void LoadCommands()
@@ -69,7 +77,7 @@ namespace PracticalMVVM.ViewModel
 
         private void EditCoffee(object obj)
         {
-
+            Messenger.Default.Send<Coffee>(selectedCoffee);
         }
 
         private bool CanEditCoffee(object obj)

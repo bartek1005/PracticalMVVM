@@ -1,4 +1,5 @@
-﻿using PracticalMVVM.Model;
+﻿using PracticalMVVM.Messages;
+using PracticalMVVM.Model;
 using PracticalMVVM.Utility;
 using System;
 using System.Collections.Generic;
@@ -39,11 +40,18 @@ namespace PracticalMVVM.ViewModel
         {
             DeleteCommand = new CustomCommand(DeleteCoffee, CanDeleteCoffee);
             SaveCommand = new CustomCommand(SaveCoffee, CanSaveCoffee);
+
+            Messenger.Default.Register<Coffee>(this, OnCoffeeReceived);
+        }
+
+        private void OnCoffeeReceived(Coffee coffee)
+        {
+            SelectedCoffee = coffee;
         }
 
         private void DeleteCoffee(object obj)
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send<UpdateListMessage>(new UpdateListMessage());
         }
 
         private bool CanDeleteCoffee(object obj)
@@ -53,7 +61,7 @@ namespace PracticalMVVM.ViewModel
 
         private void SaveCoffee(object obj)
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send<UpdateListMessage>(new UpdateListMessage());
         }
 
         private bool CanSaveCoffee(object obj)
