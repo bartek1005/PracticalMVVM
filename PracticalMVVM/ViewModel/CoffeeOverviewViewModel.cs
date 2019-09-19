@@ -17,7 +17,8 @@ namespace PracticalMVVM.ViewModel
     public class CoffeeOverviewViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private CoffeeDataService coffeeDataService;
+        private ICoffeeDataService coffeeDataService;
+        private IDialogService dialogService;
 
         public ICommand EditCommand { get; set; }
 
@@ -56,9 +57,10 @@ namespace PracticalMVVM.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public CoffeeOverviewViewModel()
+        public CoffeeOverviewViewModel(ICoffeeDataService coffeeDataService, IDialogService dialogService)
         {
-            coffeeDataService = new CoffeeDataService();
+            this.coffeeDataService = coffeeDataService;
+            this.dialogService = dialogService;
             LoadData();
             LoadCommands();
 
@@ -67,7 +69,9 @@ namespace PracticalMVVM.ViewModel
 
         private void OnUpdateListMessageReceived(UpdateListMessage obj)
         {
-            LoadData(); 
+            LoadData();
+            dialogService.CloseDetailDialog();
+            RaisePropertyChanged("SelectedCoffee");
         }
 
         private void LoadCommands()
@@ -78,6 +82,7 @@ namespace PracticalMVVM.ViewModel
         private void EditCoffee(object obj)
         {
             Messenger.Default.Send<Coffee>(selectedCoffee);
+            dialogService.ShowDetailDialog();
         }
 
         private bool CanEditCoffee(object obj)

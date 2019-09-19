@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PracticalMVVM.Services
 {
-    public interface IDataService
+    public interface ICoffeeDataService
     {
         void DeleteCoffee(Coffee coffee);
         List<Coffee> GetAllCoffees();

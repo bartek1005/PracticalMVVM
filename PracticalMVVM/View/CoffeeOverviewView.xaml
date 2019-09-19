@@ -69,6 +69,7 @@
             <Label Grid.Row="4" Grid.Column="1" Name="PriceLabel" Content="{Binding SelectedCoffee.Price, Mode=OneWay}"></Label>
             <Label Grid.Row="5" Grid.Column="1" Name="StockAmountLabel" Content="{Binding SelectedCoffee.AmountInStock, Mode=OneWay}"></Label>
             <Label Grid.Row="6" Grid.Column="1" Name="FirstTimeAddedLabel" Content="{Binding SelectedCoffee.FirstAddedToStockDate, Mode=OneWay}"></Label>
+
             <StackPanel Grid.Row ="7">
                 <Button Content="Edit Coffee" Command="{Binding EditCommand}"></Button>
             </StackPanel>

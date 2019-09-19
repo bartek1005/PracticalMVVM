@@ -1,4 +1,6 @@
-﻿using PracticalMVVM.ViewModel;
+﻿using PracticalMVVM.DAL;
+using PracticalMVVM.Services;
+using PracticalMVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,10 @@ namespace PracticalMVVM
 {
     public class ViewModelLocator
     {
-        private static CoffeeOverviewViewModel coffeeOverviewViewModel = new CoffeeOverviewViewModel();
-        private static CoffeeDetailViewModel coffeeDetailViewModel = new CoffeeDetailViewModel();
+        private static IDialogService dialogService = new DialogService();
+        private static ICoffeeDataService coffeeDataService = new CoffeeDataService(new CoffeeRepository());
+        private static CoffeeOverviewViewModel coffeeOverviewViewModel = new CoffeeOverviewViewModel(coffeeDataService,dialogService);
+        private static CoffeeDetailViewModel coffeeDetailViewModel = new CoffeeDetailViewModel(coffeeDataService, dialogService);
 
         public CoffeeOverviewViewModel CoffeeOverviewViewModel
         {

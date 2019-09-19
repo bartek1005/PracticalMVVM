@@ -5,7 +5,7 @@ using PracticalMVVM.Model;
 
 namespace PracticalMVVM.DAL
 {
-    interface ICoffeeRepository
+    public interface ICoffeeRepository
     {
         void DeleteCoffee(Coffee coffee);
         Coffee GetACoffee();

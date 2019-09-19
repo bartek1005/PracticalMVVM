@@ -1,5 +1,6 @@
 ﻿using PracticalMVVM.Messages;
 using PracticalMVVM.Model;
+using PracticalMVVM.Services;
 using PracticalMVVM.Utility;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace PracticalMVVM.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private Coffee selectedCoffee;
+        private ICoffeeDataService coffeeDataService;
+        private IDialogService dialogService;
+
         public ICommand DeleteCommand { get; set; }
         public ICommand SaveCommand { get; set; }
 
@@ -36,12 +40,16 @@ namespace PracticalMVVM.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-        public CoffeeDetailViewModel()
+        public CoffeeDetailViewModel(ICoffeeDataService coffeeDataService, IDialogService dialogService)
         {
+            this.coffeeDataService = coffeeDataService;
+            this.dialogService = dialogService;
+
+            Messenger.Default.Register<Coffee>(this, OnCoffeeReceived);
+
             DeleteCommand = new CustomCommand(DeleteCoffee, CanDeleteCoffee);
             SaveCommand = new CustomCommand(SaveCoffee, CanSaveCoffee);
 
-            Messenger.Default.Register<Coffee>(this, OnCoffeeReceived);
         }
 
         private void OnCoffeeReceived(Coffee coffee)
@@ -49,8 +57,9 @@ namespace PracticalMVVM.ViewModel
             SelectedCoffee = coffee;
         }
 
-        private void DeleteCoffee(object obj)
+        private void DeleteCoffee(object coffee)
         {
+            coffeeDataService.DeleteCoffee(SelectedCoffee);
             Messenger.Default.Send<UpdateListMessage>(new UpdateListMessage());
         }
 
@@ -59,8 +68,9 @@ namespace PracticalMVVM.ViewModel
             return true;
         }
 
-        private void SaveCoffee(object obj)
+        private void SaveCoffee(object coffee)
         {
+            coffeeDataService.UpdateCoffee(SelectedCoffee);
             Messenger.Default.Send<UpdateListMessage>(new UpdateListMessage());
         }
 

@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Content="{Binding SelectedCoffee.CoffeeName, Mode=OneWay}" Grid.ColumnSpan="2" FontSize="40" FontWeight="Bold"></Label>
 
-            <Image Source="{Binding SelectedCoffee.ImageId}"  Grid.Row="1"
+            <Image Source="{Binding SelectedCoffee.ImageId, Converter={StaticResource localImageConverter}}"  Grid.Row="1"
                        Grid.ColumnSpan="2" MaxHeight="150" MaxWidth="150"></Image>
             <Label Grid.Row="2" Content="Id" FontWeight="Bold"></Label>
             <Label Grid.Row="3" Content="Description" FontWeight="Bold" VerticalAlignment="Center"></Label>

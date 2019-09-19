@@ -1,24 +1,24 @@
-﻿using System;
+﻿using PracticalMVVM.DAL;
+using PracticalMVVM.Model;
+using PracticalMVVM.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PracticalMVVM.DAL;
-using PracticalMVVM.Model;
-using PracticalMVVM.DAL;
 
-namespace PracticalMVVM.Services
+namespace PracticalMVVM.Tests.Mocks
 {
-    public class CoffeeDataService : ICoffeeDataService
+    public class MockCoffeeDataService : ICoffeeDataService
     {
-        ICoffeeRepository repository;
-        public CoffeeDataService(ICoffeeRepository repository)
+        private ICoffeeRepository repository;
+        public MockCoffeeDataService(ICoffeeRepository repository)
         {
             this.repository = repository;
         }
         public void DeleteCoffee(Coffee coffee)
         {
-            repository.DeleteCoffee(coffee);
+            throw new NotImplementedException();
         }
 
         public List<Coffee> GetAllCoffees()
@@ -33,7 +33,7 @@ namespace PracticalMVVM.Services
 
         public void UpdateCoffee(Coffee coffee)
         {
-            repository.UpdateCoffee(coffee);
+            throw new NotImplementedException();
         }
     }
 }
